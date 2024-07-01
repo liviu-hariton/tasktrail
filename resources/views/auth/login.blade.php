@@ -35,7 +35,7 @@
                                                     </div>
 
                                                     @error('password')
-                                                    <div class="validation-invalid-label">{{ $message }}</div>
+                                                    <div class="help-block text-warning">{{ $message }}</div>
                                                     @enderror
                                                 </div>
                                                 <div class="col-lg-6">
