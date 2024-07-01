@@ -56,7 +56,17 @@
 <script async src="{{ secure_asset('assets/js/slider.js') }}"></script>
 <script src="{{ secure_asset('assets/js/app.js') }}"></script>
 <script src="{{ secure_asset('assets/vendor/moment.min.js') }}"></script>
+<script src="{{ secure_asset('assets/vendor/blockui/blockui.min.js') }}"></script>
+
+<script src="{{ secure_asset('assets/js/tasktrail.js') }}"></script>
+<script src="{{ secure_asset('assets/js/tasktrail_xhr.js') }}"></script>
 
 @stack('scripts')
+
+@auth()
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+        @csrf
+    </form>
+@endauth
 </body>
 </html>
