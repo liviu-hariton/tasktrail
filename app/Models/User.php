@@ -3,11 +3,17 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Mail\EmailConfirmLink;
+use App\Mail\PasswordReset;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\URL;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasFactory, Notifiable;
 
@@ -42,6 +48,43 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'data' => 'array',
         ];
+    }
+
+    public function sendPasswordResetNotification($token): void
+    {
+        Mail::to($this->email)->send(
+            new PasswordReset(
+                from_address: _ttrs('from_address'),
+                from_name: _ttrs('from_name'),
+                the_name: $this->name,
+                the_subject: 'Your password reset link request',
+                the_reset_url: route('password.reset', [
+                    'token' => $token,
+                    'email' => $this->email
+                ]),
+            )
+        );
+    }
+
+    public function sendEmailVerificationNotification(): void
+    {
+        Mail::to($this->email)->send(
+            new EmailConfirmLink(
+                from_address: _ttrs('from_address'),
+                from_name: _ttrs('from_name'),
+                the_name: $this->name,
+                the_subject: 'Verify your email for a seamless experience!',
+                the_confirm_url: URL::temporarySignedRoute(
+                    'verification.verify',
+                    now()->addMinutes(config('auth.verification.expire', 60)),
+                    [
+                        'id' => $this->id,
+                        'hash' => sha1($this->email),
+                    ]
+                ),
+            )
+        );
     }
 }

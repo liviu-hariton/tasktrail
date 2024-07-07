@@ -16,6 +16,8 @@
                                         <p>Enter your email address and we'll send you a link to reset your password</p>
 
                                         <form method="POST" action="{{ route('password.email') }}">
+                                            @csrf
+
                                             <div class="row">
                                                 <div class="col-lg-12">
                                                     <div class="form-group">

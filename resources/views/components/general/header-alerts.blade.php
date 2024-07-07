@@ -29,3 +29,11 @@
     <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
 </div>
 @endsession
+
+@session('status')
+<div class="alert alert-info alert-dismissible fade show alert-styled-left alert-arrow-left alert-icon">
+    <i class="bi bi-info-circle-fill"></i> {{ $value }}
+
+    <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
+</div>
+@endsession
