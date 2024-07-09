@@ -12,6 +12,12 @@ Route::get('/', function () {
     return redirect('/dashboard');
 });
 
+Route::get('setlocale/{locale}', function($locale) {
+    session(['locale' => $locale]);
+
+    return redirect()->back();
+})->name('setlocale');
+
 Route::middleware(['auth'])
     ->group(
         function() {

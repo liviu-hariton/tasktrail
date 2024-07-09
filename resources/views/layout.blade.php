@@ -13,10 +13,13 @@
     <link rel="stylesheet" href="{{ secure_asset('assets/css/backend.css') }}">
     <link rel="stylesheet" href="{{ secure_asset('assets/vendor/line-awesome/dist/line-awesome/css/line-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ secure_asset('assets/vendor/remixicon/fonts/remixicon.css') }}">
+    <link rel="stylesheet" href="{{ secure_asset('assets/vendor/flag-icons/css/flag-icons.min.css') }}">
 
     <link rel="stylesheet" href="{{ secure_asset('assets/vendor/tui-calendar/tui-calendar/dist/tui-calendar.css') }}">
     <link rel="stylesheet" href="{{ secure_asset('assets/vendor/tui-calendar/tui-date-picker/dist/tui-date-picker.css') }}">
     <link rel="stylesheet" href="{{ secure_asset('assets/vendor/tui-calendar/tui-time-picker/dist/tui-time-picker.css') }}">
+
+    <link rel="stylesheet" href="{{ secure_asset('assets/css/custom.css') }}">
 
     @include('components.general.favicon')
 

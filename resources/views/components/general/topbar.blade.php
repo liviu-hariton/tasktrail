@@ -114,14 +114,35 @@
                                 </div>
                             </div>
                         </li>
+
+                        <li class="nav-item nav-icon dropdown caption-content">
+                            <a href="#" class="search-toggle dropdown-toggle  d-flex align-items-center"
+                               id="dropdownMenuButton4"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <div class="caption ml-3">
+                                    <h6 class="mb-0 line-height">
+                                        <i class="las la-language"></i>
+                                        <i class="las la-angle-down ml-2"></i>
+                                    </h6>
+                                </div>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-right border-none">
+                                @foreach($_ttr_languages as $_ttr_language_key=>$_ttr_language_name)
+                                <li class="dropdown-item d-flex">
+                                    <span class="fi fi-{{ str_replace(['en-'], '', $_ttr_language_key) }}"></span>
+                                    <a href="{{ route('setlocale', str_replace(['-us'], '', $_ttr_language_key)) }}">{{ $_ttr_language_name }}</a>
+                                </li>
+                                @endforeach
+                            </ul>
+                        </li>
+
                         <li class="nav-item nav-icon dropdown caption-content">
                             <a href="#" class="search-toggle dropdown-toggle  d-flex align-items-center"
                                id="dropdownMenuButton4"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <img src="../assets/images/user/1.jpg" class="img-fluid rounded-circle" alt="user">
                                 <div class="caption ml-3">
-                                    <h6 class="mb-0 line-height">Savannah Nguyen<i
-                                            class="las la-angle-down ml-2"></i></h6>
+                                    <h6 class="mb-0 line-height">Savannah Nguyen<i class="las la-angle-down ml-2"></i></h6>
                                 </div>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-right border-none"

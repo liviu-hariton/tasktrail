@@ -3,5 +3,5 @@
 @section('section-title', 'Dashboard')
 
 @section('content')
-    Leave no task uncharted
+    <p>Leave no task uncharted</p>
 @endsection
