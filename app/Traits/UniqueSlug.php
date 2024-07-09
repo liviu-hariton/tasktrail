@@ -21,7 +21,8 @@ trait UniqueSlug
     /**
      * Generate a unique slug for the model.
      *
-     * @param  string $slug
+     * @param string $slug
+     * @param string $slug_separator
      * @return string
      */
     public function generateUniqueSlug(string $slug, string $slug_separator): string
@@ -42,7 +43,8 @@ trait UniqueSlug
     /**
      * Extract the number from the slug and return the modified slug.
      *
-     * @param  string $slug
+     * @param string $slug
+     * @param string $slug_separator
      * @return int|null
      */
     private function extractSlugNumber(string &$slug, string $slug_separator): ?int
@@ -73,9 +75,10 @@ trait UniqueSlug
     /**
      * Find the first available unique slug.
      *
-     * @param  string $slug
-     * @param  array  $existingSlugs
-     * @param  int|null $slugNumber
+     * @param string $slug
+     * @param array $existingSlugs
+     * @param int|null $slugNumber
+     * @param string $slug_separator
      * @return string
      */
     private function findUniqueSlug(string $slug, array $existingSlugs, ?int $slugNumber, string $slug_separator): string

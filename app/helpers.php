@@ -37,7 +37,7 @@ if(!function_exists('menuItemActive')) {
     }
 }
 
-if(!function_exists('tnrAlert')) {
+if(!function_exists('ttrAlert')) {
     /**
      * Return a formatted alert message
      *
@@ -47,10 +47,11 @@ if(!function_exists('tnrAlert')) {
      *                     <br />[custom]: dark, pink, purple, indigo, teal, yellow
      * @param string $icon icons from https://icons.getbootstrap.com/
      * @param bool $dismissible
-     * @param bool $outlined
+     * @param bool $rounded
+     * @param bool $bordered
      * @return \Illuminate\Contracts\View\View|Application|Factory|\Illuminate\Contracts\Foundation\Application
      */
-    function tnrAlert(
+    function ttrAlert(
         string $message = '',
         string $type = 'success',
         string $icon = 'bi-check-square-fill',

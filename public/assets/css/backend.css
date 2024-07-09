@@ -7223,10 +7223,10 @@ a.text-white:hover, a.text-white:focus {
         display: block;
         color: #605C8D;
         position: relative;
-        padding: 15px 30px 15px 30px;
-        margin-bottom: 5px;
-        margin-right: 0px;
-        line-height: 18px;
+        padding: 10px 30px 10px 30px;
+        margin-bottom: 0;
+        margin-right: 0;
+        line-height: 10px;
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;

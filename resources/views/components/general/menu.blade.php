@@ -11,7 +11,7 @@
     <div class="data-scrollbar" data-scroll="1">
         <nav class="iq-sidebar-menu">
             <ul id="iq-sidebar-toggle" class="iq-menu">
-                <li{{-- class="active"--}}>
+                <li class="">
                     <a href="#some-page" class="collapsed" data-toggle="collapse" aria-expanded="false">
                         <i class="ri-folder-line"></i>
                         <span class="ml-2">@lang('main_menu.section')</span>
@@ -51,7 +51,7 @@
                         <span class="ml-2">Roles</span>
                     </a>
                 </li>
-                <li{{-- class="active"--}}>
+                <li class="">
                     <a href="#logs" class="collapsed" data-toggle="collapse" aria-expanded="false">
                         <i class="las la-history"></i>
                         <span class="ml-2">Logs</span>
