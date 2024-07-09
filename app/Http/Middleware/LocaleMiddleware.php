@@ -11,9 +11,9 @@ use Symfony\Component\HttpFoundation\Response;
 class LocaleMiddleware
 {
     /**
-     * Handle an incoming request.
+     * Set the active locale
      *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     * @param Closure(Request): (Response) $next
      */
     public function handle(Request $request, Closure $next): Response
     {
