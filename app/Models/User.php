@@ -7,9 +7,9 @@ use App\Mail\EmailConfirmLink;
 use App\Mail\PasswordReset;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\URL;
 
@@ -50,6 +50,11 @@ class User extends Authenticatable implements MustVerifyEmail
             'password' => 'hashed',
             'data' => 'array',
         ];
+    }
+
+    public function profile(): HasOne
+    {
+        return $this->hasOne(User::class);
     }
 
     public function sendPasswordResetNotification($token): void
