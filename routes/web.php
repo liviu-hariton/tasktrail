@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Dashboard;
+use App\Http\Controllers\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -23,5 +24,7 @@ Route::middleware(['auth'])
         function() {
             Route::get('/dashboard', [Dashboard::class, 'index'])
                 ->name('dashboard');
+
+            Route::resource('/users', User::class);
         }
     );

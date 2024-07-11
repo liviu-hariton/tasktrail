@@ -38,6 +38,14 @@ function showTab(tab) {
     $('.nav-tabs a[href="#' + tab + '"]').tab('show');
 }
 
+function iconFormat(icon) {
+    if(!icon.id) {
+        return icon.text;
+    }
+
+    return '<i class="' + $(icon.element).data('icon') + '"></i> ' + icon.text;
+}
+
 var _last_focused_field;
 
 var TaskTrail = function () {
@@ -65,6 +73,29 @@ var TaskTrail = function () {
         };
 
         goto();
+
+        const selects2 = function() {
+            if(!$().select2) {
+                console.warn('Warning - select2.min.js is not loaded.');
+                return;
+            }
+
+            $('.select-search').select2({
+                theme: 'bootstrap4',
+            });
+
+            $('.select-icons').select2({
+                theme: 'bootstrap4',
+                templateResult: iconFormat,
+                minimumResultsForSearch: Infinity,
+                templateSelection: iconFormat,
+                escapeMarkup: function(m) {
+                    return m;
+                }
+            });
+        };
+
+        selects2();
     }
 
     const xhrCalls = function() {

@@ -1,5 +1,6 @@
 @extends('layout')
 
+@section('meta-title', 'Dashboard')
 @section('section-title', 'Dashboard')
 
 @section('content')

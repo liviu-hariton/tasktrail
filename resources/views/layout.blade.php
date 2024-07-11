@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>TaskTrail | Leave no task uncharted</title>
+    <title>@yield('meta-title') | {{ config('app.name') }}</title>
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -18,6 +18,8 @@
     <link rel="stylesheet" href="{{ secure_asset('assets/vendor/tui-calendar/tui-calendar/dist/tui-calendar.css') }}">
     <link rel="stylesheet" href="{{ secure_asset('assets/vendor/tui-calendar/tui-date-picker/dist/tui-date-picker.css') }}">
     <link rel="stylesheet" href="{{ secure_asset('assets/vendor/tui-calendar/tui-time-picker/dist/tui-time-picker.css') }}">
+    <link rel="stylesheet" href="{{ secure_asset('assets/vendor/select2/dist/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ secure_asset('assets/vendor/select2/dist/css/select2-bootstrap4.min.css') }}">
 
     <link rel="stylesheet" href="{{ secure_asset('assets/css/custom.css') }}">
 
@@ -60,6 +62,8 @@
 <script src="{{ secure_asset('assets/js/app.js') }}"></script>
 <script src="{{ secure_asset('assets/vendor/moment.min.js') }}"></script>
 <script src="{{ secure_asset('assets/vendor/blockui/blockui.min.js') }}"></script>
+<script src="{{ secure_asset('assets/vendor/select2/dist/js/select2.min.js') }}"></script>
+<script src="{{ secure_asset('assets/vendor/select2/dist/js/i18n/'.str_replace('_', '-', app()->getLocale()).'.js') }}"></script>
 
 <script src="{{ secure_asset('assets/js/tasktrail.js') }}"></script>
 <script src="{{ secure_asset('assets/js/tasktrail_xhr.js') }}"></script>

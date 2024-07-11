@@ -1,6 +1,6 @@
 <div class="iq-sidebar sidebar-default">
     <div class="iq-sidebar-logo d-flex align-items-center">
-        <a href="/" class="header-logo">
+        <a href="{{ route('dashboard') }}" class="header-logo">
             <img src="{{ secure_asset('assets/images/logo.svg') }}" alt="logo">
             <h3 class="logo-title light-logo">TaskTrail</h3>
         </a>
@@ -12,35 +12,16 @@
         <nav class="iq-sidebar-menu">
             <ul id="iq-sidebar-toggle" class="iq-menu">
                 <li class="">
-                    <a href="#some-page" class="collapsed" data-toggle="collapse" aria-expanded="false">
-                        <i class="ri-folder-line"></i>
-                        <span class="ml-2">@lang('main_menu.section')</span>
-                        <i class="las la-angle-right iq-arrow-right arrow-active"></i>
-                        <i class="las la-angle-down iq-arrow-right arrow-hover"></i>
+                    <a href="{{ route('dashboard') }}" class="svg-icon">
+                        <i class="las la-tachometer-alt"></i>
+                        <span class="ml-2">Dashboard</span>
                     </a>
-                    <ul id="some-page" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                        <li class=" ">
-                            <a href="#user" class="collapsed" data-toggle="collapse" aria-expanded="false">
-                                <i class="ri-folder-line"></i>
-                                <span>@lang('main_menu.subsection')</span>
-                                <i class="las la-angle-right iq-arrow-right arrow-active"></i>
-                                <i class="las la-angle-down iq-arrow-right arrow-hover"></i>
-                            </a>
-                            <ul id="user" class="iq-submenu collapse" data-parent="#some-page">
-                                <li class="">
-                                    <a href="#">
-                                        <i class="las la-minus"></i><span>@lang('main_menu.item')</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
                 </li>
 
                 <li><hr /></li>
 
                 <li class="">
-                    <a href="#" class="svg-icon">
+                    <a href="{{ route('users.index') }}" class="svg-icon">
                         <i class="las la-users-cog"></i>
                         <span class="ml-2">Users</span>
                     </a>

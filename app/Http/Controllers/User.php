@@ -11,7 +11,7 @@ class User extends Controller
      */
     public function index()
     {
-        //
+        return view('sections.users.index');
     }
 
     /**
