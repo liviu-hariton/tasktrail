@@ -19,7 +19,7 @@ class User extends Controller
      */
     public function create()
     {
-        //
+        return view('sections.users.create');
     }
 
     /**

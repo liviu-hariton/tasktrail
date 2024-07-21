@@ -11,7 +11,7 @@
     <div class="data-scrollbar" data-scroll="1">
         <nav class="iq-sidebar-menu">
             <ul id="iq-sidebar-toggle" class="iq-menu">
-                <li class="">
+                <li class="{{ menuItemActive(['dashboard']) ? 'active' : '' }}">
                     <a href="{{ route('dashboard') }}" class="svg-icon">
                         <i class="las la-tachometer-alt"></i>
                         <span class="ml-2">Dashboard</span>
@@ -20,7 +20,7 @@
 
                 <li><hr /></li>
 
-                <li class="">
+                <li class="{{ menuItemActive(['users.*']) ? 'active' : '' }}">
                     <a href="{{ route('users.index') }}" class="svg-icon">
                         <i class="las la-users-cog"></i>
                         <span class="ml-2">Users</span>

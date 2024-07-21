@@ -9,10 +9,15 @@
             <div class="header-title">
                 <h4 class="card-title">User List <span class="badge badge-info">12</span></h4>
             </div>
+
+            <div class="user-list-files d-flex">
+                <a class="bg-success" href="{{ route('users.create') }}"> Create new user <i class="las la-plus-circle"></i></a>
+                <a class="bg-primary" href="javascript:void();" data-toggle="modal" data-target="#users_search" title="Search for specific users"> <i class="las la-search"></i></a>
+            </div>
         </div>
         <div class="card-body">
             <div class="row justify-content-between">
-                <div class="col-md-9">
+                <div class="col-md-12">
                     <div class="btn-group">
                         <div class="btn-group" role="group">
                             <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown">
@@ -23,12 +28,6 @@
                                 <a class="dropdown-item" href="#"><i class="las la-trash-alt"></i> Delete</a>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="user-list-files d-flex">
-                        <a class="bg-success" href="javascript:void();"> Create new user <i class="las la-plus-circle"></i></a>
-                        <a class="bg-primary" href="javascript:void();" data-toggle="modal" data-target="#users_search" title="Search for specific users"> <i class="las la-search"></i></a>
                     </div>
                 </div>
             </div>
@@ -77,15 +76,16 @@
                     <td>2019/12/01</td>
                     <td>2019/12/01</td>
                     <td class="text-center">
-                        <div class="custom-control custom-switch custom-control-inline">
-                            <input type="checkbox" class="custom-control-input" id="customSwitch2" checked="">
-                            <label class="custom-control-label" for="customSwitch2">&nbsp;</label>
-                        </div>
+                        <span class="badge badge-success">da</span>
                     </td>
                     <td class="text-center">
-                        <div class="flex align-items-center list-user-action">
-                            <a class="btn btn-sm bg-secondary" data-toggle="tooltip" data-placement="top" title="Edit" href="#"><i class="ri-pencil-line mr-0"></i></a>
-                            <a class="btn btn-sm bg-danger" data-toggle="tooltip" data-placement="top" title="Delete" href="#"><i class="ri-delete-bin-line mr-0"></i></a>
+                        <div class="btn-group dropleft">
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><i class="las la-cog"></i></button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#"><i class="las la-ban"></i> Disable</a>
+                                <a class="dropdown-item" href="#"><i class="ri-pencil-line"></i> Edit</a>
+                                <a class="dropdown-item" href="#"><i class="ri-delete-bin-line"></i> Delete</a>
+                            </div>
                         </div>
                     </td>
                 </tr>

@@ -2,6 +2,9 @@
     font-size: 24px !important;
 }
 
+.modal-right {
+    padding-right: 0 !important;
+}
 .modal-right .modal-dialog {
     margin: 0
 }
@@ -57,7 +60,7 @@
 }
 
 .modal-right .modal-dialog {
-    margin-left: auto
+    margin-left: auto;
 }
 
 .modal-right.modal .modal-dialog {
@@ -239,4 +242,77 @@
 
 .custom-select:disabled {
     cursor: default
+}
+
+.table .dropdown,
+.table .btn-group,
+.table .btn-group-vertical {
+    position: static !important;
+}
+
+.badge-indicator-absolute{
+    position:relative
+}
+.password-indicator-badge-absolute {
+    z-index: 9999;
+}
+.badge-indicator-absolute .password-indicator-badge-absolute {
+    position:absolute;
+    top:50%;
+    margin-top:-.6875rem;
+    right:.875rem;
+    transition:all ease-in-out .15s
+}
+@media (prefers-reduced-motion:reduce){
+    .badge-indicator-absolute .password-indicator-badge-absolute {
+        transition: none;
+    }
+}
+
+.validation-invalid-label {
+    width: 100%;
+    clear: both !important;
+}
+.validation-invalid-label,
+.validation-valid-label {
+    margin-top: .5rem;
+    margin-bottom: .5rem;
+    display: block;
+    color: #ef5350;
+    position: relative;
+    padding-left: 1.625rem
+}
+
+.validation-valid-label {
+    color: #25b372
+}
+
+.validation-invalid-label:before,
+.validation-valid-label:before {
+    font-family: 'Line Awesome Free';
+    font-size: 1rem;
+    position: absolute;
+    top: .1875rem;
+    left: 0;
+    display: inline-block;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale
+}
+
+.validation-invalid-label:empty,
+.validation-valid-label:empty {
+    display: none
+}
+
+.validation-invalid-label:before {
+    content: "\f057"
+}
+
+.validation-valid-label:before {
+    content: "\f058"
+}
+
+.table > tbody > tr > td {
+    vertical-align: middle;
 }

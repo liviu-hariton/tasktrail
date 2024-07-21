@@ -64,6 +64,12 @@
 <script src="{{ secure_asset('assets/vendor/blockui/blockui.min.js') }}"></script>
 <script src="{{ secure_asset('assets/vendor/select2/dist/js/select2.min.js') }}"></script>
 <script src="{{ secure_asset('assets/vendor/select2/dist/js/i18n/'.str_replace('_', '-', app()->getLocale()).'.js') }}"></script>
+<script src="{{ secure_asset('assets/vendor/passy/dist/jquery-passy.js') }}"></script>
+<script src="{{ secure_asset('assets/vendor/jquery-validation/dist/jquery.validate.min.js') }}"></script>
+<script src="{{ secure_asset('assets/vendor/jquery-validation/dist/additional-methods.min.js') }}"></script>
+<script src="{{ secure_asset('assets/vendor/jquery-validation/dist/localization/messages_'.str_replace('_', '-', app()->getLocale()).'.js') }}"></script>
+
+<script src="{{ secure_asset('assets/js/lang/'.str_replace('_', '-', app()->getLocale()).'/forms_validation.js') }}"></script>
 
 <script src="{{ secure_asset('assets/js/tasktrail.js') }}"></script>
 <script src="{{ secure_asset('assets/js/tasktrail_xhr.js') }}"></script>

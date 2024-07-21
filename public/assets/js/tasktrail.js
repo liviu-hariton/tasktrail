@@ -49,6 +49,87 @@ function iconFormat(icon) {
 var _last_focused_field;
 
 var TaskTrail = function () {
+    const formsValidation = function() {
+        if(!$().validate) {
+            console.warn('Warning - validate.min.js is not loaded.');
+            return;
+        }
+
+        $.validator.addMethod("fullemail", function(value, element) {
+            return this.optional(element) || /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value);
+        }, "Completează o adresă de email validă");
+
+        if($("#f-new-user" ).length) {
+            const new_user_validator = $('#f-new-user').validate({
+                errorClass: 'validation-invalid-label',
+                successClass: 'validation-valid-label',
+                validClass: 'validation-valid-label',
+                highlight: function(element, errorClass) {
+                    $(element).removeClass(errorClass);
+                },
+                unhighlight: function(element, errorClass) {
+                    $(element).removeClass(errorClass);
+                },
+                errorPlacement: function(error, element) {
+                    error.insertAfter(element);
+                },
+                submitHandler: function(form) {
+                    Syncshop.block();
+
+                    form.submit();
+                },
+                rules: {
+                    lastname: {
+                        minlength: 3,
+                        required: true,
+                        lettersonlysp: true
+                    },
+                    firstname: {
+                        minlength: 3,
+                        required: true,
+                        lettersonlysp: true
+                    },
+                    email: {
+                        required: true,
+                        fullemail: true
+                    },
+                    phone: {
+                        rangelength: [10, 10],
+                        digits: true
+                    },
+                    password: {
+                        required: true,
+                        minlength: 6
+                    }
+                },
+                messages: {
+                    lastname: {
+                        required: TaskTrail.translate('lastname', 'required'),
+                        minlength: TaskTrail.translate('lastname', 'minlength'),
+                        lettersonlysp: TaskTrail.translate('lastname', 'lettersonlysp'),
+                    },
+                    firstname: {
+                        required: TaskTrail.translate('firstname', 'required'),
+                        minlength: TaskTrail.translate('firstname', 'minlength'),
+                        lettersonlysp: TaskTrail.translate('firstname', 'lettersonlysp')
+                    },
+                    email: {
+                        required: TaskTrail.translate('email', 'required'),
+                        fullemail: TaskTrail.translate('email', 'fullemail'),
+                    },
+                    phone: {
+                        rangelength: TaskTrail.translate('phone', 'rangelength'),
+                        digits: TaskTrail.translate('phone', 'digits'),
+                    },
+                    password: {
+                        required: TaskTrail.translate('password', 'required'),
+                        minlength: TaskTrail.translate('password', 'minlength'),
+                    }
+                }
+            });
+        }
+    }
+
     const layoutInteractions = function() {
         const prevent_default = function() {
             $(".prevent-default").each(function(index) {
@@ -96,6 +177,39 @@ var TaskTrail = function () {
         };
 
         selects2();
+
+        const passwordUtils = function() {
+            if (!$().passy) {
+                console.warn('Warning - passy.js is not loaded.');
+                return;
+            }
+
+            var $inputLabel = $('.password-field');
+            var $outputLabel = $('.password-indicator-badge-absolute');
+
+            $.passy.requirements.length.min = 6;
+
+            var feedback = [
+                {color: '#D55757', text: 'Slabă', textColor: '#fff'},
+                {color: '#EB7F5E', text: 'Normală', textColor: '#fff'},
+                {color: '#3BA4CE', text: 'Bună', textColor: '#fff'},
+                {color: '#40B381', text: 'Puternică', textColor: '#fff'}
+            ];
+
+            $inputLabel.passy(function(strength) {
+                $outputLabel.text(feedback[strength].text);
+                $outputLabel.css({
+                    'background-color': feedback[strength].color,
+                    'color': feedback[strength].textColor
+                });
+            });
+
+            $('.generate-password').on('click', function() {
+                $inputLabel.passy('generate', $(this).data('lenght'));
+            });
+        }
+
+        passwordUtils();
     }
 
     const xhrCalls = function() {
@@ -121,6 +235,7 @@ var TaskTrail = function () {
 
     return {
         initLayoutInteractions: function() {
+            formsValidation();
             layoutInteractions();
             xhrCalls();
         },
@@ -193,6 +308,14 @@ var TaskTrail = function () {
             if($el.length) {
                 $el.removeClass(removeCSS);
                 $el.addClass(addCSS);
+            }
+        },
+
+        translate: function(field, validation_type) {
+            if(translations[field] && translations[field][validation_type]) {
+                return translations[field][validation_type];
+            } else {
+                return "Translation not found";
             }
         },
     }
