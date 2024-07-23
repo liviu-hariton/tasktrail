@@ -69,6 +69,7 @@
 <script src="{{ secure_asset('assets/vendor/jquery-validation/dist/additional-methods.min.js') }}"></script>
 <script src="{{ secure_asset('assets/vendor/jquery-validation/dist/localization/messages_'.str_replace('_', '-', app()->getLocale()).'.js') }}"></script>
 
+{{--Just add more language files in the lang folder and they will be autoloaded--}}
 @foreach($js_lang_files as $js_lang_file)
 <script src="{{ secure_asset('assets/js/lang/' . str_replace('_', '-', app()->getLocale()) . '/' . $js_lang_file->getFilename()) }}"></script>
 @endforeach
