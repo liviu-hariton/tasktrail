@@ -1,4 +1,4 @@
-const translations = {
+const _LANG_forms_validation = {
     lastname: {
         required: "Completează numele utilizatorului",
         minlength: "Completează cel puțin 3 caractere",
@@ -22,3 +22,13 @@ const translations = {
         minlength: "Completează cel puțin 6 caractere"
     },
 };
+
+if (typeof window !== 'undefined') {
+    // Running in a browser environment
+    window['_LANG_forms_validation'] = _LANG_forms_validation;
+} else if (typeof global !== 'undefined') {
+    // Running in a Node.js environment
+    global['_LANG_forms_validation'] = _LANG_forms_validation;
+} else {
+    throw new Error('Unknown global object environment');
+}

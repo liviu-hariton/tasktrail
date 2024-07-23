@@ -1,3 +1,16 @@
+// Utility function to merge objects deeply
+function merge_object_deep(target, source) {
+    for(const key in source) {
+        if(source[key] instanceof Object && key in target) {
+            Object.assign(source[key], merge_object_deep(target[key], source[key]));
+        }
+    }
+
+    Object.assign(target || {}, source);
+
+    return target;
+}
+
 // Function to handle and remember tab clicks and manage active tabs
 function handleTabClick(e) {
     const clickedTabId = $(this).attr('href');
@@ -46,9 +59,9 @@ function iconFormat(icon) {
     return '<i class="' + $(icon.element).data('icon') + '"></i> ' + icon.text;
 }
 
-var _last_focused_field;
+let _last_focused_field;
 
-var TaskTrail = function () {
+const TaskTrail = function () {
     const formsValidation = function() {
         if(!$().validate) {
             console.warn('Warning - validate.min.js is not loaded.');
@@ -311,7 +324,26 @@ var TaskTrail = function () {
             }
         },
 
+        /**
+         * Get translations for various Javascript actions or messages
+         *
+         * @param field
+         * @param validation_type
+         * @returns {*|string}
+         */
         translate: function(field, validation_type) {
+            // Determine the global object based on the environment
+            const _global_obj = (typeof window !== 'undefined') ? window : global;
+
+            const translations = {};
+
+            // Iterate through properties of the global object to find the language object
+            for(let prop in _global_obj) {
+                if(_global_obj.hasOwnProperty(prop) && /^_LANG_[a-zA-Z0-9_]+$/.test(prop)) {
+                    merge_object_deep(translations, _global_obj[prop]);
+                }
+            }
+
             if(translations[field] && translations[field][validation_type]) {
                 return translations[field][validation_type];
             } else {
