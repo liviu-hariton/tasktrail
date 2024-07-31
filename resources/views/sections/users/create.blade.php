@@ -47,7 +47,7 @@
                                 <label class="control-label col-md-3 align-self-center"></label>
                                 <div class="col-md-9">
                                     <div class="custom-control custom-switch custom-control-inline">
-                                        <input type="checkbox" class="custom-control-input" name="send_login" id="send_login" value="1" checked>
+                                        <input type="checkbox" class="custom-control-input" name="send_login" id="send_login" value="1" {{ old('send_login') ? old('send_login') !== '1' ? '' : 'checked' : 'checked' }}>
                                         <label class="custom-control-label" for="send_login">trimite datele de autentificare pe email</label>
                                     </div>
                                 </div>
@@ -56,8 +56,8 @@
                                 <label class="control-label col-md-3 align-self-center"></label>
                                 <div class="col-md-9">
                                     <div class="custom-control custom-switch custom-control-inline">
-                                        <input type="checkbox" class="custom-control-input" name="active" id="active" value="1" checked>
-                                        <label class="custom-control-label" for="active">contul este activ (se poate autentifica imediat)</label>
+                                        <input type="checkbox" class="custom-control-input" name="is_active" id="is_active" value="1" {{ old('is_active') ? old('is_active') !== '1' ? '' : 'checked' : 'checked' }}>
+                                        <label class="custom-control-label" for="is_active">contul este activ (se poate autentifica imediat)</label>
                                     </div>
                                 </div>
                             </div>

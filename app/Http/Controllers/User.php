@@ -2,61 +2,78 @@
 
 namespace App\Http\Controllers;
 
+use AllowDynamicProperties;
+use App\Http\Requests\UserRequest;
+use App\Traits\FileUpload;
+use Illuminate\Auth\MustVerifyEmail;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
-class User extends Controller
+#[AllowDynamicProperties] class User extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    use FileUpload, MustVerifyEmail;
+
     public function index()
     {
         return view('sections.users.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return view('sections.users.create');
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created user
+     *
+     * @param UserRequest $request
+     * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        //
+        // Validate the request data
+        $validated = $request->validated();
+
+        // Upload the avatar file and get its path
+        $avatar_path = $this->uploadFile($request, 'avatar', 'avatars', 'public');
+
+        // Create a new user with the validated data
+        $user = \App\Models\User::create([
+            'email' => $validated['email'],
+            'password' => bcrypt($validated['password']),
+            'is_active' => $validated['is_active'],
+        ]);
+
+        // Mark the user's email as verified
+        $user->markEmailAsVerified();
+
+        // Create a profile for the user with the validated data and avatar path
+        $user->profile()->create([
+            'firstname' => $validated['firstname'],
+            'lastname' => $validated['lastname'],
+            'phone' => $validated['phone'],
+            'avatar' => $avatar_path,
+        ]);
+
+        // Redirect to the users index page with a success message
+        return redirect()->route('users.index')->with('success', 'User created successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         //
