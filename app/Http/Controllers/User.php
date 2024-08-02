@@ -39,6 +39,7 @@ use Illuminate\Http\Request;
 
         // Create a new user with the validated data
         $user = \App\Models\User::create([
+            'username' => $validated['username'],
             'email' => $validated['email'],
             'password' => bcrypt($validated['password']),
             'is_active' => $validated['is_active'],

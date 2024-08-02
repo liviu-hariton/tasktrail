@@ -22,9 +22,9 @@
                                             <div class="row">
                                                 <div class="col-lg-12">
                                                     <div class="form-group">
-                                                        <input type="email" name="email" id="login-email" value="{{ old('email') }}" class="floating-input form-control" placeholder="Enter your email address" required autocomplete="email" autofocus>
+                                                        <input type="text" name="username" id="login-username" value="{{ old('username') }}" class="floating-input form-control" placeholder="Enter your username" required autocomplete="username" autofocus>
 
-                                                        @error('email')
+                                                        @error('username')
                                                         <div class="help-block text-warning">{{ $message }}</div>
                                                         @enderror
                                                     </div>

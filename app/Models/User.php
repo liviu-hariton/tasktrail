@@ -23,7 +23,8 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'username',
+        'role_id',
         'email',
         'password',
         'is_active',
@@ -64,7 +65,7 @@ class User extends Authenticatable implements MustVerifyEmail
             new PasswordReset(
                 from_address: _ttrs('from_address'),
                 from_name: _ttrs('from_name'),
-                the_name: $this->name,
+                the_name: $this->username,
                 the_subject: 'Your password reset link request',
                 the_reset_url: route('password.reset', [
                     'token' => $token,
@@ -80,7 +81,7 @@ class User extends Authenticatable implements MustVerifyEmail
             new EmailConfirmLink(
                 from_address: _ttrs('from_address'),
                 from_name: _ttrs('from_name'),
-                the_name: $this->name,
+                the_name: $this->username,
                 the_subject: 'Verify your email for a seamless experience!',
                 the_confirm_url: URL::temporarySignedRoute(
                     'verification.verify',

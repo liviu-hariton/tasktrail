@@ -24,6 +24,12 @@
                             <h5 class="mb-3">Login details</h5>
 
                             <div class="form-group row">
+                                <label class="control-label col-md-3 align-self-center" for="username">Username: <span class="text-danger">*</span></label>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control" name="username" id="username" value="{{ old('username') }}" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label class="control-label col-md-3 align-self-center" for="email">Email: <span class="text-danger">*</span></label>
                                 <div class="col-md-9">
                                     <input type="email" class="form-control" name="email" id="email" value="{{ old('email') }}" required>

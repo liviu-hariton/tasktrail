@@ -24,6 +24,16 @@ class LoginController extends Controller
         return $this->redirectTo;
     }
 
+    /**
+     * Get the login username to be used by the controller.
+     *
+     * @return string
+     */
+    public function username()
+    {
+        return 'username';
+    }
+
     public function logout(Request $request)
     {
         $this->guard()->logout();

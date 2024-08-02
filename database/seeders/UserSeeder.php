@@ -14,10 +14,20 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('users')->insert([
+        $user_id = DB::table('users')->insertGetId([
+            'username' => 'admin',
             'email' => 'admin@tasktrail.lhdev.eu',
             'email_verified_at' => now(),
             'password' => Hash::make('admin'),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('profiles')->insert([
+            'user_id' => $user_id,
+            'firstname' => 'Admin',
+            'lastname' => 'User',
+            'phone' => '0712345678',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
