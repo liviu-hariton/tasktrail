@@ -63,6 +63,15 @@
                                     @enderror
                                 </div>
                             </div>
+                            <div class="form-group row" id="password-changed-notification-option" style="display:none;">
+                                <label class="control-label col-md-3 align-self-center"></label>
+                                <div class="col-md-9">
+                                    <div class="custom-control custom-switch custom-control-inline">
+                                        <input type="checkbox" class="custom-control-input" name="send_login" id="send_login" value="1" checked>
+                                        <label class="custom-control-label" for="send_login">trimite noua parola pe email</label>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="form-group row">
                                 <label class="control-label col-md-3 align-self-center"></label>
                                 <div class="col-md-9">

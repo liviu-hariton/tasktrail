@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\PasswordChanged;
+use App\Events\UserRegistered;
 use App\Models\User as UserModel;
 use App\Http\Requests\UserRequest;
 use App\Traits\FileUpload;
 use App\Traits\Overall;
 use Illuminate\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
 class User extends Controller
@@ -62,6 +65,10 @@ class User extends Controller
             'avatar' => $avatar_path,
         ]);
 
+        if(isset($validated['send_login']) && $validated['send_login'] == '1') {
+            event(new UserRegistered($user, $validated['password']));
+        }
+
         // Redirect to the users index page with a success message
         return redirect()->route('users.index')->with('success', 'User created successfully.');
     }
@@ -111,6 +118,13 @@ class User extends Controller
             'phone' => $validated['phone'],
             'avatar' => $avatar_path,
         ]);
+
+        if(isset($validated['send_login']) && $validated['send_login'] == '1') {
+            // Check if the password is changed and notify the user if it has
+            if(isset($validated['password']) && !Hash::check($validated['password'], $user->password)) {
+                event(new PasswordChanged($user, $validated['password']));
+            }
+        }
 
         // Redirect to the users index page with a success message
         return redirect()->route('users.index')->with('success', 'User updated successfully.');

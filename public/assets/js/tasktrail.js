@@ -263,6 +263,8 @@ const TaskTrail = function () {
 
         selects2();
 
+        const password_notification = $("#password-changed-notification-option");
+
         const passwordUtils = function() {
             if (!$().passy) {
                 console.warn('Warning - passy.js is not loaded.');
@@ -291,10 +293,26 @@ const TaskTrail = function () {
 
             $('.generate-password').on('click', function() {
                 $inputLabel.passy('generate', $(this).data('lenght'));
+
+                if(password_notification.length) {
+                    password_notification.show();
+                }
             });
         }
 
         passwordUtils();
+
+        const password_changed = function() {
+            const password_field = $(".password-field");
+
+            if (password_notification.length) {
+                password_field.on("input", function() {
+                    password_notification.toggle(password_field.val() !== "");
+                });
+            }
+        }
+
+        password_changed();
     }
 
     const xhrCalls = function() {

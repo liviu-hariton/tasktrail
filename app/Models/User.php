@@ -7,6 +7,7 @@ use App\Mail\EmailConfirmLink;
 use App\Mail\PasswordReset;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -93,5 +94,50 @@ class User extends Authenticatable implements MustVerifyEmail
                 ),
             )
         );
+    }
+
+    public function roles(): BelongsToMany
+    {
+        return $this->belongsToMany(Role::class);
+    }
+
+    public function hasRole($roles): bool
+    {
+        if($this->isGod()) {
+            return true;
+        }
+
+        if(is_array($roles)) {
+            return $this->roles()->whereIn('name', $roles)->exists();
+        }
+
+        return $this->roles()->where('name', $roles)->exists();
+    }
+
+    public function hasPermission($permission): bool
+    {
+        if($this->isGod()) {
+            return true;
+        }
+
+        return $this->roles()->whereHas('permissions', function($query) use ($permission) {
+            $query->where('name', $permission);
+        })->exists();
+    }
+
+    public function hasAnyPermission(array $permissions): bool
+    {
+        if($this->isGod()) {
+            return true;
+        }
+
+        return $this->roles()->whereHas('permissions', function($query) use ($permissions) {
+            $query->whereIn('name', $permissions);
+        })->exists();
+    }
+
+    public function isGod(): bool
+    {
+        return $this->roles()->where('name', 'GOD')->exists();
     }
 }

@@ -36,10 +36,20 @@ class UserRequest extends FormRequest
             ],
         ];
 
+        // A new user is created
         if($this->isMethod('post')) {
             $rules['username'] .= '|unique:users';
             $rules['email'] .= '|unique:users';
             $rules['password'] = 'required|min:8';
+        }
+
+        // An existing user is updated
+        if($this->isMethod('put')) {
+            $userId = $this->route('user');
+
+            $rules['username'] .= '|unique:users,username,'.$userId->id;
+            $rules['email'] .= '|unique:users,email,'.$userId->id;
+            $rules['password'] = 'nullable|min:8';
         }
 
         return $rules;
