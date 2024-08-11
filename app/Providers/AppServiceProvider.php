@@ -2,13 +2,17 @@
 
 namespace App\Providers;
 
+use App\Traits\Overall;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
+    use Overall;
+
     /**
      * Register any application services.
      */
@@ -24,21 +28,15 @@ class AppServiceProvider extends ServiceProvider
     {
         Model::shouldBeStrict();
 
+        Paginator::useBootstrapFour();
+
         /**
          * Load all available Javascript language files
          */
         View::composer('*', function ($view) {
-            $locale = str_replace('_', '-', app()->getLocale());
+            $view->with('js_lang_files', $this->loadJavascriptLanguageFiles());
 
-            $lang_path = public_path("assets/js/lang/".$locale);
-
-            $js_lang_files = [];
-
-            if(File::exists($lang_path)) {
-                $js_lang_files = File::files($lang_path);
-            }
-
-            $view->with('js_lang_files', $js_lang_files);
+            $view->with('per_page_options', $this->getPerPageOptions());
         });
     }
 }

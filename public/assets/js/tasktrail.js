@@ -70,7 +70,11 @@ const TaskTrail = function () {
 
         $.validator.addMethod("fullemail", function(value, element) {
             return this.optional(element) || /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value);
-        }, "Completează o adresă de email validă");
+        }, TaskTrail.translate('email', 'fullemail'));
+
+        $.validator.addMethod("lettersonlysp", function(value, element) {
+            return this.optional(element) || /^[A-Za-z\s]+$/.test(value);
+        }, TaskTrail.translate('lastname', 'lettersonlysp'));
 
         if($("#f-new-user" ).length) {
             const new_user_validator = $('#f-new-user').validate({
@@ -136,6 +140,74 @@ const TaskTrail = function () {
                     },
                     password: {
                         required: TaskTrail.translate('password', 'required'),
+                        minlength: TaskTrail.translate('password', 'minlength'),
+                    }
+                }
+            });
+        }
+
+        if($("#f-edit-user" ).length) {
+            const edit_user_validator = $('#f-edit-user').validate({
+                errorClass: 'validation-invalid-label',
+                successClass: 'validation-valid-label',
+                validClass: 'validation-valid-label',
+                highlight: function(element, errorClass) {
+                    $(element).removeClass(errorClass);
+                },
+                unhighlight: function(element, errorClass) {
+                    $(element).removeClass(errorClass);
+                },
+                errorPlacement: function(error, element) {
+                    error.insertAfter(element);
+                },
+                submitHandler: function(form) {
+                    Syncshop.block();
+
+                    form.submit();
+                },
+                rules: {
+                    lastname: {
+                        minlength: 3,
+                        required: true,
+                        lettersonlysp: true
+                    },
+                    firstname: {
+                        minlength: 3,
+                        required: true,
+                        lettersonlysp: true
+                    },
+                    email: {
+                        required: true,
+                        fullemail: true
+                    },
+                    phone: {
+                        rangelength: [10, 10],
+                        digits: true
+                    },
+                    password: {
+                        minlength: 6
+                    }
+                },
+                messages: {
+                    lastname: {
+                        required: TaskTrail.translate('lastname', 'required'),
+                        minlength: TaskTrail.translate('lastname', 'minlength'),
+                        lettersonlysp: TaskTrail.translate('lastname', 'lettersonlysp'),
+                    },
+                    firstname: {
+                        required: TaskTrail.translate('firstname', 'required'),
+                        minlength: TaskTrail.translate('firstname', 'minlength'),
+                        lettersonlysp: TaskTrail.translate('firstname', 'lettersonlysp')
+                    },
+                    email: {
+                        required: TaskTrail.translate('email', 'required'),
+                        fullemail: TaskTrail.translate('email', 'fullemail'),
+                    },
+                    phone: {
+                        rangelength: TaskTrail.translate('phone', 'rangelength'),
+                        digits: TaskTrail.translate('phone', 'digits'),
+                    },
+                    password: {
                         minlength: TaskTrail.translate('password', 'minlength'),
                     }
                 }
@@ -264,7 +336,7 @@ const TaskTrail = function () {
 
             if(parseInt(_dirty_form) === 0) {
                 $(_el).block({
-                    message: '<span class="font-weight-bold"><i class="fas fa-spinner fa-spin mr-2"></i>&nbsp; Processing</span>',
+                    message: '<i class="las la-spinner la-spin mr-2"></i>&nbsp; Processing',
                     overlayCSS: {
                         backgroundColor: '#1b2024',
                         opacity: 0.6,

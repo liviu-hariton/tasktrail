@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Dashboard;
+use App\Http\Controllers\Setting;
 use App\Http\Controllers\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -22,6 +23,10 @@ Route::get('setlocale/{locale}', function($locale) {
 Route::middleware(['auth'])
     ->group(
         function() {
+            // Ajax calls
+            Route::patch('set-per-page-option', [Setting::class, 'setPerPageOption'])->name('set-per-page-option');
+
+            // App routes
             Route::get('/dashboard', [Dashboard::class, 'index'])
                 ->name('dashboard');
 

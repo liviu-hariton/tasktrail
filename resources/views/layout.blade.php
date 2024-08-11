@@ -37,7 +37,7 @@
     <div id="loading-center"></div>
 </div>
 
-<div class="wrapper">
+<div class="wrapper content-inner">
     @include('components.general.menu')
 
     @include('components.general.topbar')
@@ -46,6 +46,8 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
+                    @include('components.general.header-alerts')
+
                     @yield('content')
                 </div>
             </div>
