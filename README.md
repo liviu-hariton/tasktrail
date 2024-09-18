@@ -13,7 +13,7 @@ Welcome to TaskTrail, the ultimate open-source project management tool designed 
 TaskTrail is more than just a project management tool; it’s your guide to project success. Whether you're managing a single project or overseeing a portfolio of initiatives, TaskTrail provides the clarity and control needed to achieve your goals. Join our growing community of users who are transforming the way they manage projects, and blaze your own trail to success with TaskTrail.
 
 ## Requirements
-* PHP >= 8.2
+* PHP >= 8.3
 * Laravel >= 11.0
 
 ### License
