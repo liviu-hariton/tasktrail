@@ -8,15 +8,11 @@ services:
     volumes:
       - ./src:/var/www/html
       - ./php.ini:/usr/local/etc/php/php.ini
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.tasktrail.rule=Host(`tasktrail.test`)"
-      - "traefik.http.services.tasktrail.loadbalancer.server.port=80"
-      - "traefik.http.routers.tasktrail.entrypoints=websecure"
-      - "traefik.http.routers.tasktrail.tls.certresolver=myresolver"
+    ports:
+      - "80:80"
+      - "443:443"  # SSL port
     networks:
       - app-network
-      - traefik-network
 
   mysql:
     image: mysql:8.0
@@ -58,5 +54,3 @@ volumes:
 networks:
   app-network:
     driver: bridge
-  traefik-network:
-    external: true
